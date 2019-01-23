@@ -3,7 +3,7 @@ from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
 from os import curdir, sep
 from urlparse import urlparse
 from urlparse import urlparse, parse_qs
-PORT_NUMBER = 8080
+PORT_NUMBER = 5000
 
 
 sensor=0
