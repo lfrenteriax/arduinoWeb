@@ -9,14 +9,30 @@ PORT_NUMBER = 8080
 sensor=0
 #This class will handles any incoming request from
 #the browser 
+s1=0
+s2=0
+s3=0
 def getArguments(path):
+	global s1,s2,s3
 	try:
-		print path
+		#print path
 		query = urlparse(path).query
 		query_components = dict(qc.split("=") for qc in query.split("&"))
 		print query_components
-		sensor= query_components['sensor']
-		print sensor
+		try:
+			s1= query_components['sensor1']
+		except:
+			pass
+		try:
+			s2= query_components['sensor2']
+		except:
+			pass
+		try:
+			s3= int(query_components['sensor3']== 'True')
+		except:
+			pass
+	
+		print s1,s2,s3
 		#imsi = query_components["imsi"]
 	except:
 		print ('No argumentos')
@@ -26,8 +42,9 @@ class myHandler(BaseHTTPRequestHandler):
 	
 	#Handler for the GET requests
 	def do_GET(self):
-		if self.path=="/":
-			self.path="/index.html"
+		global s1,s2,s3
+		if self.path=="/":  #127.0.0.1:8080/
+			self.path="/index.html" #127.0.0.1:8080/index.html
 		if self.path.find('?'):
 			print self.path
 			query_components = parse_qs(urlparse(self.path).query)
@@ -63,7 +80,9 @@ class myHandler(BaseHTTPRequestHandler):
 				self.send_response(200)
 				self.send_header('Content-type',mimetype)
 				self.end_headers()
-				self.wfile.write(f.read())
+				data=f.read()
+				data= data.replace('s1',str(s1)).replace('s2',str(s2)).replace('s3',str(s3))
+				self.wfile.write(data)
 				f.close()
 			return
 
