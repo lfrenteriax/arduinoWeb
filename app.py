@@ -5,8 +5,12 @@ try:
 except:
 	from http.server import BaseHTTPRequestHandler,HTTPServer
 from os import curdir, sep
-from urlparse import urlparse
-from urlparse import urlparse, parse_qs
+try:
+	from urlparse import urlparse
+	from urlparse import urlparse, parse_qs
+except:
+	from urllib.parse import urlparse, parse_qs
+	
 PORT_NUMBER = 5000
 
 
