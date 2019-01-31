@@ -91,7 +91,7 @@ class myHandler(BaseHTTPRequestHandler):
 				self.send_header('Content-type',mimetype)
 				self.end_headers()
 				data=f.read()
-				data= data.repalce('s1',srt(s1))
+				data= data.replace('s1',srt(s1))
 				self.wfile.write(data)
 				f.close()
 			return
