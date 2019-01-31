@@ -92,7 +92,7 @@ class myHandler(BaseHTTPRequestHandler):
 				self.end_headers()
 				data=f.read()
 				data= data.replace('s1',str(s1))
-				self.wfile.write(data)
+				self.wfile.write(bytes(data, 'UTF-8'))
 				f.close()
 			return
 
